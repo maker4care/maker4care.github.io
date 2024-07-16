@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" id="_793C9324-2C77-42FC-AB36-D974EB404660" name="First_Steps" namespace="https://kiegroup.org/dmn/_CEC8F2B3-6043-4C19-8B09-8E69EA107EE1" expressionLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" exporter="Camunda Modeler" exporterVersion="5.22.0">
+  <description>Specification: First steps towards the legal demarcation of different products
+
+Specification of items necessary to decide whether it is a Medical Device, Personal Protective Equipment or other product.</description>
+  <extensionElements />
+  <itemDefinition id="_07AC985B-E1A7-483A-A686-24A1517EB9FE" name="Type" isCollection="false">
+    <typeRef>string</typeRef>
+    <allowedValues id="_89F80651-2B54-43FA-8F8C-1E6160A80BD6" kie:constraintType="enumeration">
+      <text>"PPE", "MD", "PPE and MD", "Neither"</text>
+    </allowedValues>
+  </itemDefinition>
+  <inputData id="_425636ED-4365-49C8-BC52-94C603C16E61" name="User Protection">
+    <description>The product protects the user.</description>
+    <extensionElements>
+      <kie:attachment url="https://maker4care.atlassian.net/wiki/spaces/BAC/pages/6389779/Specification+First+steps+towards+the+legal+demarcation+of+different+products#specification_maker4care-protect-only-the-user" name="Confluence - Specification: First steps towards the legal demarcation of different products" />
+    </extensionElements>
+    <variable id="_8E8F0935-2DC0-417B-9734-75C65715E795" name="Protect the user" typeRef="boolean" />
+  </inputData>
+  <inputData id="_8696EBB6-315A-41A6-B5E2-4E52B5880464" name="Patient Protection">
+    <description>The product protects the patient.</description>
+    <extensionElements>
+      <kie:attachment url="https://maker4care.atlassian.net/wiki/spaces/BAC/pages/6389779/Specification+First+steps+towards+the+legal+demarcation+of+different+products#specification_maker4care-protects-the-patient" name="Confluence - Specification: First steps towards the legal demarcation of different products" />
+    </extensionElements>
+    <variable id="_383F43AA-E6B5-440A-A64F-1B32609AEC35" name="Protect the patient" typeRef="boolean" />
+  </inputData>
+  <decision id="_AD43EF2E-0524-49B3-AFE3-DB8C643E3EEB" name="Which type">
+    <extensionElements>
+      <kie:attachment url="https://maker4care.atlassian.net/wiki/spaces/BAC/pages/6389779/Specification+First+steps+towards+the+legal+demarcation+of+different+products#Constraints%2FRules" name="Confluence - Specification: First steps towards the legal demarcation of different products" />
+    </extensionElements>
+    <variable id="_AC7A61ED-301D-479C-9EFF-DABE4C26B385" name="Which type" typeRef="Type" />
+    <informationRequirement id="_2427BA21-05FE-4D52-B51B-19632E8F77AE">
+      <requiredInput href="#_425636ED-4365-49C8-BC52-94C603C16E61" />
+    </informationRequirement>
+    <informationRequirement id="_CD201999-641A-4DF4-B3EC-C702BD2BD97E">
+      <requiredInput href="#_8696EBB6-315A-41A6-B5E2-4E52B5880464" />
+    </informationRequirement>
+    <decisionTable id="_F7C9C88F-57CA-4C32-A557-B317E6052CBA" preferredOrientation="Rule-as-Row">
+      <input id="_49AF1715-16D0-465B-B900-CD9B47C60657">
+        <inputExpression id="_9E5832AB-C7B5-4003-962A-CA4491782190" typeRef="boolean">
+          <text>User Protection</text>
+        </inputExpression>
+      </input>
+      <input id="_A9473A29-0611-4D17-B674-9330E2C6A859">
+        <inputExpression id="_89455E93-B2A6-496E-8000-236D8097BF97" typeRef="boolean">
+          <text>Patient Protection</text>
+        </inputExpression>
+      </input>
+      <output id="_A28E7252-5DF5-456C-A08D-9C9EAC3E340C" />
+      <annotation name="annotation-1" />
+      <rule id="_E129821F-F3AE-4B1F-84BE-C3964A6BE9B1">
+        <inputEntry id="_71C8FE16-3391-4AF8-A12C-5A8122CCE728">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="_7803F58C-0BFB-479D-A6E7-3FDDC2E29C01">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="_EB2A4716-45C2-4567-AC36-5F38AD70E0F0">
+          <text>"PPE"</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_097ECD56-F305-4470-ACB1-65B0826EB0BD">
+        <inputEntry id="_DBB214EE-A12D-4E40-B7FB-24B95CC8CDE9">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="_9E2C95BD-F15D-45F6-8D96-0473AF24C0D6">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="_55D9F316-21D9-4E99-AC73-17B6989D04B9">
+          <text>"MD"</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_0AABD716-BF9E-4FAC-990A-826998C70D40">
+        <inputEntry id="_A78DFCF0-85E7-4A43-9DAF-C84187F7C823">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="_B56D468D-8678-4E2F-811B-4DFDEC48A071">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="_F17E4FDC-85EF-4DC8-A4BD-1EF86DD2C537">
+          <text>"PPE and MD"</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_08676012-F00E-4121-A043-0EA56264E7C0">
+        <inputEntry id="_80A999D2-69EC-4917-B07A-1A4C38EF9165">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="_459A55D6-12E8-44DF-9E8A-85BF81117C65">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="_A8ED5BBD-5416-44FD-9E32-61A9A9A2B329">
+          <text>"Neither"</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <textAnnotation id="_1A533F1C-8A7E-494D-82C0-C0E1E17B3FFC">
+    <text>1</text>
+  </textAnnotation>
+  <textAnnotation id="_1963C80C-EB19-48FB-A349-6FA8B867BAE6">
+    <text>2</text>
+  </textAnnotation>
+  <textAnnotation id="_B0FED41F-3480-4852-BF8A-A21A1BDFAAF9">
+    <text>CATEGORY</text>
+  </textAnnotation>
+  <association id="Association_15b4axb">
+    <sourceRef href="#_1A533F1C-8A7E-494D-82C0-C0E1E17B3FFC" />
+    <targetRef href="#_425636ED-4365-49C8-BC52-94C603C16E61" />
+  </association>
+  <association id="Association_1qhkkf3">
+    <sourceRef href="#_B0FED41F-3480-4852-BF8A-A21A1BDFAAF9" />
+    <targetRef href="#_AD43EF2E-0524-49B3-AFE3-DB8C643E3EEB" />
+  </association>
+  <association id="Association_0lptj38">
+    <sourceRef href="#_1963C80C-EB19-48FB-A349-6FA8B867BAE6" />
+    <targetRef href="#_8696EBB6-315A-41A6-B5E2-4E52B5880464" />
+  </association>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_587CEDB5-FBE7-4C72-B0D6-1663F9BEFB55" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_F7C9C88F-57CA-4C32-A557-B317E6052CBA">
+            <kie:width>50</kie:width>
+            <kie:width>180</kie:width>
+            <kie:width>180</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_425636ED-4365-49C8-BC52-94C603C16E61" dmnElementRef="_425636ED-4365-49C8-BC52-94C603C16E61" isCollapsed="false">
+        <dc:Bounds height="50" width="100" x="247.29906542056074" y="400" />
+        <dmndi:DMNLabel />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_8696EBB6-315A-41A6-B5E2-4E52B5880464" dmnElementRef="_8696EBB6-315A-41A6-B5E2-4E52B5880464" isCollapsed="false">
+        <dc:Bounds height="50" width="100" x="423" y="400" />
+        <dmndi:DMNLabel />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_AD43EF2E-0524-49B3-AFE3-DB8C643E3EEB" dmnElementRef="_AD43EF2E-0524-49B3-AFE3-DB8C643E3EEB" isCollapsed="false">
+        <dc:Bounds height="50" width="100" x="335" y="225" />
+        <dmndi:DMNLabel />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_1A533F1C-8A7E-494D-82C0-C0E1E17B3FFC" dmnElementRef="_1A533F1C-8A7E-494D-82C0-C0E1E17B3FFC" isCollapsed="false">
+        <dc:Bounds height="50" width="100" x="160" y="50" />
+        <dmndi:DMNLabel />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_1963C80C-EB19-48FB-A349-6FA8B867BAE6" dmnElementRef="_1963C80C-EB19-48FB-A349-6FA8B867BAE6" isCollapsed="false">
+        <dc:Bounds height="50" width="100" x="510" y="50" />
+        <dmndi:DMNLabel />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_B0FED41F-3480-4852-BF8A-A21A1BDFAAF9" dmnElementRef="_B0FED41F-3480-4852-BF8A-A21A1BDFAAF9" isCollapsed="false">
+        <dc:Bounds height="50" width="100" x="335" y="50" />
+        <dmndi:DMNLabel />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_2427BA21-05FE-4D52-B51B-19632E8F77AE" dmnElementRef="_2427BA21-05FE-4D52-B51B-19632E8F77AE">
+        <di:waypoint x="297.29906542056074" y="425" />
+        <di:waypoint x="385" y="275" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_CD201999-641A-4DF4-B3EC-C702BD2BD97E" dmnElementRef="_CD201999-641A-4DF4-B3EC-C702BD2BD97E">
+        <di:waypoint x="473" y="425" />
+        <di:waypoint x="385" y="275" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1by77q8" dmnElementRef="Association_15b4axb">
+        <di:waypoint x="216" y="100" />
+        <di:waypoint x="292" y="400" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0goznlo" dmnElementRef="Association_1qhkkf3">
+        <di:waypoint x="386" y="100" />
+        <di:waypoint x="389" y="225" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_031112f" dmnElementRef="Association_0lptj38">
+        <di:waypoint x="554" y="100" />
+        <di:waypoint x="485" y="400" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
